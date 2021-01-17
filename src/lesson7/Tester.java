@@ -11,13 +11,12 @@ import java.util.*;
 
 public class Tester {
 
-    private Method beforeMethod = null;
-    private Method afterMethod = null;
+    private static Method beforeMethod = null;
+    private static Method afterMethod = null;
 
-    //Контейнер для хранения тестируемых методов
-    private List<Method> testedMethodList = new LinkedList<>();
 
-    public void start(Class c){
+
+    public static void start(Class c){
         if (!c.isAnnotationPresent(TestedClass.class)){
             throw new RuntimeException("Переданный класс не является тестируемым!");
         } else {
@@ -42,6 +41,9 @@ public class Tester {
                     e.printStackTrace();
                 }
             }
+
+            //Контейнер для хранения тестируемых методов
+            List<Method> testedMethodList = new LinkedList<>();
 
             //наполнение данного контейнера
             for (Method m : allMethod){
